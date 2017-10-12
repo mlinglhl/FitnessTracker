@@ -16,6 +16,7 @@
 		893B8FB11F8FE53400A358F3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B8FB01F8FE53400A358F3 /* HomeViewController.swift */; };
 		893B8FB31F8FE59600A358F3 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B8FB21F8FE59600A358F3 /* AccountManager.swift */; };
 		893B8FB51F8FE70700A358F3 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B8FB41F8FE70700A358F3 /* ActivityTableViewCell.swift */; };
+		893B8FB71F8FEAED00A358F3 /* ActivityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B8FB61F8FEAED00A358F3 /* ActivityTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		893B8FB01F8FE53400A358F3 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		893B8FB21F8FE59600A358F3 /* AccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
 		893B8FB41F8FE70700A358F3 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
+		893B8FB61F8FEAED00A358F3 /* ActivityTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,9 +66,9 @@
 			children = (
 				893B8F991F8F061F00A358F3 /* AppDelegate.swift */,
 				893B8FAE1F8FE0E300A358F3 /* DataManager.swift */,
-				893B8FB01F8FE53400A358F3 /* HomeViewController.swift */,
-				893B8FB41F8FE70700A358F3 /* ActivityTableViewCell.swift */,
 				893B8FB21F8FE59600A358F3 /* AccountManager.swift */,
+				893B8FB91F8FEB0700A358F3 /* HomeViewController */,
+				893B8FB81F8FEAFB00A358F3 /* ActivityTableViewController */,
 				893B8F9D1F8F061F00A358F3 /* Main.storyboard */,
 				893B8FA31F8F061F00A358F3 /* Assets.xcassets */,
 				893B8FA51F8F061F00A358F3 /* LaunchScreen.storyboard */,
@@ -74,6 +76,23 @@
 				893B8FA01F8F061F00A358F3 /* FitnessTracker.xcdatamodeld */,
 			);
 			path = FitnessTracker;
+			sourceTree = "<group>";
+		};
+		893B8FB81F8FEAFB00A358F3 /* ActivityTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				893B8FB61F8FEAED00A358F3 /* ActivityTableViewController.swift */,
+			);
+			path = ActivityTableViewController;
+			sourceTree = "<group>";
+		};
+		893B8FB91F8FEB0700A358F3 /* HomeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				893B8FB01F8FE53400A358F3 /* HomeViewController.swift */,
+				893B8FB41F8FE70700A358F3 /* ActivityTableViewCell.swift */,
+			);
+			path = HomeViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,6 +172,7 @@
 				893B8FB51F8FE70700A358F3 /* ActivityTableViewCell.swift in Sources */,
 				893B8FA21F8F061F00A358F3 /* FitnessTracker.xcdatamodeld in Sources */,
 				893B8F9A1F8F061F00A358F3 /* AppDelegate.swift in Sources */,
+				893B8FB71F8FEAED00A358F3 /* ActivityTableViewController.swift in Sources */,
 				893B8FB11F8FE53400A358F3 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
