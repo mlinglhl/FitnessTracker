@@ -17,6 +17,6 @@ class AccountManager: NSObject {
     var accountArray = [Account]()
     
     func setUp() {
-        accountArray =
+        accountArray = dataManager.fetchAccounts()
     }
 }

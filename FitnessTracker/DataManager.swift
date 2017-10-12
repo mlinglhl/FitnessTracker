@@ -34,13 +34,13 @@ class DataManager: NSObject {
         return activity
     }
     
-    func fetchActivities() -> [Activity] {
-        let request = NSFetchRequest<Activity>(entityName: "Activity")
+    func fetchAccounts() -> [Account] {
+        let request = NSFetchRequest<Account>(entityName: "Account")
         do {
-            let activityArray = try appDelegate.persistentContainer.viewContext.fetch(request)
-            return activityArray
+            let accountArray = try appDelegate.persistentContainer.viewContext.fetch(request)
+            return accountArray
         } catch {
-            return [Activity]()
+            return [Account]()
         }
     }
 }
