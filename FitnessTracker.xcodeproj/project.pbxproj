@@ -8,22 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		893B8F9A1F8F061F00A358F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B8F991F8F061F00A358F3 /* AppDelegate.swift */; };
-		893B8F9C1F8F061F00A358F3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B8F9B1F8F061F00A358F3 /* ViewController.swift */; };
 		893B8F9F1F8F061F00A358F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 893B8F9D1F8F061F00A358F3 /* Main.storyboard */; };
 		893B8FA21F8F061F00A358F3 /* FitnessTracker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 893B8FA01F8F061F00A358F3 /* FitnessTracker.xcdatamodeld */; };
 		893B8FA41F8F061F00A358F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 893B8FA31F8F061F00A358F3 /* Assets.xcassets */; };
 		893B8FA71F8F061F00A358F3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 893B8FA51F8F061F00A358F3 /* LaunchScreen.storyboard */; };
+		893B8FAF1F8FE0E300A358F3 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B8FAE1F8FE0E300A358F3 /* DataManager.swift */; };
+		893B8FB11F8FE53400A358F3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B8FB01F8FE53400A358F3 /* HomeViewController.swift */; };
+		893B8FB31F8FE59600A358F3 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B8FB21F8FE59600A358F3 /* AccountManager.swift */; };
+		893B8FB51F8FE70700A358F3 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B8FB41F8FE70700A358F3 /* ActivityTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		893B8F961F8F061F00A358F3 /* FitnessTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitnessTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		893B8F991F8F061F00A358F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		893B8F9B1F8F061F00A358F3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		893B8F9E1F8F061F00A358F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		893B8FA11F8F061F00A358F3 /* FitnessTracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FitnessTracker.xcdatamodel; sourceTree = "<group>"; };
 		893B8FA31F8F061F00A358F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		893B8FA61F8F061F00A358F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		893B8FA81F8F061F00A358F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		893B8FAE1F8FE0E300A358F3 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		893B8FB01F8FE53400A358F3 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		893B8FB21F8FE59600A358F3 /* AccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
+		893B8FB41F8FE70700A358F3 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +63,10 @@
 			isa = PBXGroup;
 			children = (
 				893B8F991F8F061F00A358F3 /* AppDelegate.swift */,
-				893B8F9B1F8F061F00A358F3 /* ViewController.swift */,
+				893B8FAE1F8FE0E300A358F3 /* DataManager.swift */,
+				893B8FB01F8FE53400A358F3 /* HomeViewController.swift */,
+				893B8FB41F8FE70700A358F3 /* ActivityTableViewCell.swift */,
+				893B8FB21F8FE59600A358F3 /* AccountManager.swift */,
 				893B8F9D1F8F061F00A358F3 /* Main.storyboard */,
 				893B8FA31F8F061F00A358F3 /* Assets.xcassets */,
 				893B8FA51F8F061F00A358F3 /* LaunchScreen.storyboard */,
@@ -139,9 +148,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				893B8F9C1F8F061F00A358F3 /* ViewController.swift in Sources */,
+				893B8FB31F8FE59600A358F3 /* AccountManager.swift in Sources */,
+				893B8FAF1F8FE0E300A358F3 /* DataManager.swift in Sources */,
+				893B8FB51F8FE70700A358F3 /* ActivityTableViewCell.swift in Sources */,
 				893B8FA21F8F061F00A358F3 /* FitnessTracker.xcdatamodeld in Sources */,
 				893B8F9A1F8F061F00A358F3 /* AppDelegate.swift in Sources */,
+				893B8FB11F8FE53400A358F3 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
