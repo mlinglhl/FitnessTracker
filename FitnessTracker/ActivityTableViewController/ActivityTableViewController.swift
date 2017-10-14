@@ -10,7 +10,7 @@ import UIKit
 
 class ActivityTableViewController: UITableViewController {
 
-    var account: Account!
+    var activity: Activity?
     
     override func viewDidLoad() {
         super.viewDidLoad()
