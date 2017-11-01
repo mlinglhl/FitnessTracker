@@ -19,7 +19,7 @@ class DataManager: NSObject {
         appDelegate.saveContext()
     }
     
-    func generate(_ objectName: String) -> NSManagedObject {
+    private func generate(_ objectName: String) -> NSManagedObject {
         let object = NSEntityDescription.insertNewObject(forEntityName: objectName, into: appDelegate.persistentContainer.viewContext)
         return object
     }
