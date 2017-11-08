@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13241" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Account" representedClassName="Account" syncable="YES" codeGenerationType="class">
+    <entity name="AccountObject" representedClassName="AccountObject" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="activities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Activity" inverseName="account" inverseEntity="Activity" syncable="YES"/>
+        <relationship name="activities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ActivityObject" inverseName="accounts" inverseEntity="ActivityObject" syncable="YES"/>
     </entity>
-    <entity name="Activity" representedClassName="Activity" syncable="YES" codeGenerationType="class">
+    <entity name="ActivityObject" representedClassName="ActivityObject" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="accounts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AccountObject" inverseName="activities" inverseEntity="AccountObject" syncable="YES"/>
+        <relationship name="records" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RecordObject" inverseName="activity" inverseEntity="RecordObject" syncable="YES"/>
+    </entity>
+    <entity name="RecordObject" representedClassName="RecordObject" syncable="YES" codeGenerationType="class">
         <attribute name="repetitions" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="time" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="weight" optional="YES" attributeType="Decimal" defaultValueString="0" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="weight" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
         <attribute name="weightInPounds" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="account" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="activities" inverseEntity="Account" syncable="YES"/>
+        <relationship name="activity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ActivityObject" inverseName="records" inverseEntity="ActivityObject" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Account" positionX="-236" positionY="9" width="128" height="75"/>
-        <element name="Activity" positionX="-54" positionY="0" width="128" height="135"/>
+        <element name="AccountObject" positionX="-236" positionY="9" width="128" height="75"/>
+        <element name="ActivityObject" positionX="-54" positionY="0" width="128" height="90"/>
+        <element name="RecordObject" positionX="-144" positionY="54" width="128" height="120"/>
     </elements>
 </model>

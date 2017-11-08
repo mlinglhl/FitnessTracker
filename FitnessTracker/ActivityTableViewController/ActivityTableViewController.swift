@@ -14,7 +14,7 @@ class ActivityTableViewController: UITableViewController {
     @IBOutlet weak var weightSlider: UISlider!
     @IBOutlet weak var repSlider: UISlider!
 
-    var activity: Activity?
+    var record: RecordObject?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +22,8 @@ class ActivityTableViewController: UITableViewController {
     
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
         let dataManager = DataManager.sharedInstance
-        if activity == nil {
-            activity = dataManager.generateActivity()
+        if record == nil {
+            record = dataManager.generateActivity()
         }
         activity!.name = nameTextField.text
         activity!.weight = NSDecimalNumber(value: weightSlider.value)

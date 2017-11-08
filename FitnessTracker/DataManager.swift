@@ -24,23 +24,28 @@ class DataManager: NSObject {
         return object
     }
     
-    func generateAccount() -> Account {
-        let account = generate("Account") as! Account
+    func generateAccount() -> AccountObject {
+        let account = generate("AccountObject") as! AccountObject
         return account
     }
     
-    func generateActivity() -> Activity {
-        let activity = generate("Activity") as! Activity
+    func generateActivity() -> ActivityObject {
+        let activity = generate("ActivityObject") as! ActivityObject
         return activity
     }
     
-    func fetchAccounts() -> [Account] {
-        let request = NSFetchRequest<Account>(entityName: "Account")
+    func generateRecord() -> RecordObject {
+        let record = generate("RecordObject") as! RecordObject
+        return record
+    }
+
+    func fetchAccounts() -> [AccountObject] {
+        let request = NSFetchRequest<AccountObject>(entityName: "AccountObject")
         do {
             let accountArray = try appDelegate.persistentContainer.viewContext.fetch(request)
             return accountArray
         } catch {
-            return [Account]()
+            return [AccountObject]()
         }
     }
 }
