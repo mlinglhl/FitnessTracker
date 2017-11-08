@@ -2,11 +2,11 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13241" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="AccountObject" representedClassName="AccountObject" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="activities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ActivityObject" inverseName="accounts" inverseEntity="ActivityObject" syncable="YES"/>
+        <relationship name="activities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ActivityObject" inverseName="account" inverseEntity="ActivityObject" syncable="YES"/>
     </entity>
     <entity name="ActivityObject" representedClassName="ActivityObject" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="accounts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AccountObject" inverseName="activities" inverseEntity="AccountObject" syncable="YES"/>
+        <relationship name="account" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AccountObject" inverseName="activities" inverseEntity="AccountObject" syncable="YES"/>
         <relationship name="records" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RecordObject" inverseName="activity" inverseEntity="RecordObject" syncable="YES"/>
     </entity>
     <entity name="RecordObject" representedClassName="RecordObject" syncable="YES" codeGenerationType="class">
@@ -17,8 +17,8 @@
         <relationship name="activity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ActivityObject" inverseName="records" inverseEntity="ActivityObject" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AccountObject" positionX="-236" positionY="9" width="128" height="75"/>
-        <element name="ActivityObject" positionX="-54" positionY="0" width="128" height="90"/>
-        <element name="RecordObject" positionX="-144" positionY="54" width="128" height="120"/>
+        <element name="AccountObject" positionX="-405" positionY="-63" width="128" height="73"/>
+        <element name="ActivityObject" positionX="-54" positionY="0" width="128" height="88"/>
+        <element name="RecordObject" positionX="-234" positionY="81" width="128" height="118"/>
     </elements>
 </model>

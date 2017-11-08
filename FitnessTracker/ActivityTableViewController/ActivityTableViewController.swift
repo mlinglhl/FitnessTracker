@@ -23,10 +23,11 @@ class ActivityTableViewController: UITableViewController {
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
         let dataManager = DataManager.sharedInstance
         if record == nil {
-            record = dataManager.generateActivity()
+            record = dataManager.generateRecord()()
         }
-        activity!.name = nameTextField.text
-        activity!.weight = NSDecimalNumber(value: weightSlider.value)
-        activity!.repetitions = Int16(repSlider.value)
+        record!.name = nameTextField.text
+        record!.weight = NSDecimalNumber(value: weightSlider.value)
+        record!.repetitions = Int16(repSlider.value)
+        record!.account
     }
 }

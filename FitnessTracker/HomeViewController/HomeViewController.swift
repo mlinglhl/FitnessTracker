@@ -22,10 +22,10 @@ let accountManager = AccountManager.sharedInstance
         if segue.identifier == "ActivityTableViewController" {
             let indexPath = activityTableView.indexPathForSelectedRow!
             let account = accountManager.accountArray[indexPath.section]
-            let activities = accountManager.activityDictionary[account]
-            let activity = activities![indexPath.row]
+            let records = accountManager.recordDictionary[account]
+            let record = records![indexPath.row]
             let atvc = segue.destination as! ActivityTableViewController
-            atvc.activity = activity
+            atvc.record = record
         }
     }
 }

@@ -14,20 +14,30 @@ class AccountManager: NSObject {
     
     let dataManager = DataManager.sharedInstance
     
-    var accountArray = [Account]()
-    var activityDictionary = [Account: [Activity]]()
+    var accountArray = [AccountObject]()
+    var activityDictionary = [AccountObject: [ActivityObject]]()
+    var recordDictionary = [ActivityObject: [RecordObject]]()
     
     func setUp() {
         accountArray = dataManager.fetchAccounts()
         accountArray.sort(by: {$0.name ?? "No name" > $1.name ?? "No name"})
         
         for account in accountArray {
-            var activities = [Activity]()
+            var activities = [ActivityObject]()
             if account.activities != nil {
-                activities = Array(account.activities!) as! [Activity]
+                activities = Array(account.activities!) as! [ActivityObject]
             }
             activities.sort(by: { $0.name ?? "No name" > $1.name ?? "No name"})
             activityDictionary.updateValue(activities, forKey: account)
+            
+            for activity in activities {
+                var records = [RecordObject]()
+                if activity.records != nil {
+                    records = Array(activity.records!) as! [RecordObject]
+                }
+                records.sort(by: {$0.weight?.intValue ?? 0 > $1.weight?.intValue ?? 0})
+                recordDictionary.updateValue(records, forKey: activity)
+            }
         }
     }
 }
