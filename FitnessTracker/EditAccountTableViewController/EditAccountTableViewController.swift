@@ -10,8 +10,10 @@ import UIKit
 
 class EditAccountTableViewController: UITableViewController {
     var account: AccountObject?
-    var newAccount = false
     var reloadDelegate: ReloadDataProtocol!
+
+    var newAccount = false
+    var savePressed = false
     
     @IBOutlet weak var accountNameTextField: UITextField!
     override func viewDidLoad() {
@@ -24,10 +26,17 @@ class EditAccountTableViewController: UITableViewController {
     }
 
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
+        savePressed = true
         account!.name = accountNameTextField.text
         let accountManager = AccountManager.sharedInstance
         accountManager.editAccount(account!, new: newAccount)
         reloadDelegate.reloadAllData()
         navigationController?.popViewController(animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if !savePressed && newAccount {
+            DataManager.sharedInstance.deleteObject(account!)
+        }
     }
 }

@@ -48,4 +48,8 @@ class DataManager: NSObject {
             return [AccountObject]()
         }
     }
+    
+    func deleteObject(_ object: NSManagedObject) {
+        appDelegate.persistentContainer.viewContext.delete(object)
+    }
 }
