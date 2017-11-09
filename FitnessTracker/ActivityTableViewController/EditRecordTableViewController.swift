@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ActivityTableViewController: UITableViewController {
+class EditRecordTableViewController: UITableViewController {
 
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var weightSlider: UISlider!
@@ -23,11 +23,9 @@ class ActivityTableViewController: UITableViewController {
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
         let dataManager = DataManager.sharedInstance
         if record == nil {
-            record = dataManager.generateRecord()()
+            record = dataManager.generateRecord()
         }
-        record!.name = nameTextField.text
         record!.weight = NSDecimalNumber(value: weightSlider.value)
         record!.repetitions = Int16(repSlider.value)
-        record!.account
     }
 }

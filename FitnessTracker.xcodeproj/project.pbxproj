@@ -15,8 +15,10 @@
 		893B8FAF1F8FE0E300A358F3 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B8FAE1F8FE0E300A358F3 /* DataManager.swift */; };
 		893B8FB11F8FE53400A358F3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B8FB01F8FE53400A358F3 /* HomeViewController.swift */; };
 		893B8FB31F8FE59600A358F3 /* AccountManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B8FB21F8FE59600A358F3 /* AccountManager.swift */; };
-		893B8FB51F8FE70700A358F3 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B8FB41F8FE70700A358F3 /* ActivityTableViewCell.swift */; };
-		893B8FB71F8FEAED00A358F3 /* ActivityTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B8FB61F8FEAED00A358F3 /* ActivityTableViewController.swift */; };
+		893B8FB51F8FE70700A358F3 /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B8FB41F8FE70700A358F3 /* RecordTableViewCell.swift */; };
+		893B8FB71F8FEAED00A358F3 /* EditRecordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893B8FB61F8FEAED00A358F3 /* EditRecordTableViewController.swift */; };
+		894D3CF61FB4CF760027143F /* AccountCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894D3CF51FB4CF760027143F /* AccountCollectionViewCell.swift */; };
+		894D3CF81FB4E7750027143F /* NewAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894D3CF71FB4E7750027143F /* NewAccountTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,8 +32,10 @@
 		893B8FAE1F8FE0E300A358F3 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		893B8FB01F8FE53400A358F3 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		893B8FB21F8FE59600A358F3 /* AccountManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountManager.swift; sourceTree = "<group>"; };
-		893B8FB41F8FE70700A358F3 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
-		893B8FB61F8FEAED00A358F3 /* ActivityTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewController.swift; sourceTree = "<group>"; };
+		893B8FB41F8FE70700A358F3 /* RecordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
+		893B8FB61F8FEAED00A358F3 /* EditRecordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRecordTableViewController.swift; sourceTree = "<group>"; };
+		894D3CF51FB4CF760027143F /* AccountCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCollectionViewCell.swift; sourceTree = "<group>"; };
+		894D3CF71FB4E7750027143F /* NewAccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAccountTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +72,7 @@
 				893B8FAE1F8FE0E300A358F3 /* DataManager.swift */,
 				893B8FB21F8FE59600A358F3 /* AccountManager.swift */,
 				893B8FB91F8FEB0700A358F3 /* HomeViewController */,
+				894D3CF91FB4E7810027143F /* NewAccountTableViewController */,
 				893B8FB81F8FEAFB00A358F3 /* ActivityTableViewController */,
 				893B8F9D1F8F061F00A358F3 /* Main.storyboard */,
 				893B8FA31F8F061F00A358F3 /* Assets.xcassets */,
@@ -81,7 +86,7 @@
 		893B8FB81F8FEAFB00A358F3 /* ActivityTableViewController */ = {
 			isa = PBXGroup;
 			children = (
-				893B8FB61F8FEAED00A358F3 /* ActivityTableViewController.swift */,
+				893B8FB61F8FEAED00A358F3 /* EditRecordTableViewController.swift */,
 			);
 			path = ActivityTableViewController;
 			sourceTree = "<group>";
@@ -90,9 +95,18 @@
 			isa = PBXGroup;
 			children = (
 				893B8FB01F8FE53400A358F3 /* HomeViewController.swift */,
-				893B8FB41F8FE70700A358F3 /* ActivityTableViewCell.swift */,
+				893B8FB41F8FE70700A358F3 /* RecordTableViewCell.swift */,
+				894D3CF51FB4CF760027143F /* AccountCollectionViewCell.swift */,
 			);
 			path = HomeViewController;
+			sourceTree = "<group>";
+		};
+		894D3CF91FB4E7810027143F /* NewAccountTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				894D3CF71FB4E7750027143F /* NewAccountTableViewController.swift */,
+			);
+			path = NewAccountTableViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,11 +183,13 @@
 			files = (
 				893B8FB31F8FE59600A358F3 /* AccountManager.swift in Sources */,
 				893B8FAF1F8FE0E300A358F3 /* DataManager.swift in Sources */,
-				893B8FB51F8FE70700A358F3 /* ActivityTableViewCell.swift in Sources */,
+				893B8FB51F8FE70700A358F3 /* RecordTableViewCell.swift in Sources */,
 				893B8FA21F8F061F00A358F3 /* FitnessTracker.xcdatamodeld in Sources */,
 				893B8F9A1F8F061F00A358F3 /* AppDelegate.swift in Sources */,
-				893B8FB71F8FEAED00A358F3 /* ActivityTableViewController.swift in Sources */,
+				893B8FB71F8FEAED00A358F3 /* EditRecordTableViewController.swift in Sources */,
+				894D3CF61FB4CF760027143F /* AccountCollectionViewCell.swift in Sources */,
 				893B8FB11F8FE53400A358F3 /* HomeViewController.swift in Sources */,
+				894D3CF81FB4E7750027143F /* NewAccountTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

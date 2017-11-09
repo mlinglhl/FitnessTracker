@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ActivityTableViewCell: UITableViewCell {
+class RecordTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -11,20 +11,24 @@ import UIKit
 class HomeViewController: UIViewController {
 let accountManager = AccountManager.sharedInstance
     
+    @IBOutlet weak var accountCollectionView: UICollectionView!
     @IBOutlet weak var activityTableView: UITableView!
-
+    var activeAccount: AccountObject?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         accountManager.setUp()
+        if accountManager.accountArray.count == 0 {
+            performSegue(withIdentifier: "NewAccountTableViewController", sender: nil)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ActivityTableViewController" {
+        if segue.identifier == "EditRecordTableViewController" {
             let indexPath = activityTableView.indexPathForSelectedRow!
-            let account = accountManager.accountArray[indexPath.section]
-            let records = accountManager.recordDictionary[account]
-            let record = records![indexPath.row]
-            let atvc = segue.destination as! ActivityTableViewController
+            let activity = accountManager.activityDictionary[activeAccount!]![indexPath.section]
+            let record = accountManager.recordDictionary[activity]![indexPath.row]
+            let atvc = segue.destination as! EditRecordTableViewController
             atvc.record = record
         }
     }
@@ -32,16 +36,40 @@ let accountManager = AccountManager.sharedInstance
 
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return accountManager.accountArray.count
+        return activeAccount?.activities?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let account = accountManager.accountArray[section]
-        return account.activities?.count ?? 0
+        return activeAccount?.activities?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityTableViewCell", for: indexPath) as! ActivityTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "RecordTableViewCell", for: indexPath) as! RecordTableViewCell
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "EditRecordTableViewController", sender: nil)
+    }
+}
+
+extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return accountManager.accountArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AccountCollectionViewCell", for: indexPath) as! AccountCollectionViewCell
+        let account = accountManager.accountArray[indexPath.item]
+        cell.accountNameLabel.text = account.name ?? "No name"
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        activeAccount = accountManager.accountArray[indexPath.item]
     }
 }
