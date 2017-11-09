@@ -9,31 +9,39 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-let accountManager = AccountManager.sharedInstance
-    
+
+    //MARK: Properties
+    let accountManager = AccountManager.sharedInstance
+    @IBOutlet weak var recordTableView: UITableView!
     @IBOutlet weak var accountCollectionView: UICollectionView!
-    @IBOutlet weak var activityTableView: UITableView!
     var activeAccount: AccountObject?
     
+    //MARK: Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         accountManager.setUp()
         if accountManager.accountArray.count == 0 {
-            performSegue(withIdentifier: "NewAccountTableViewController", sender: nil)
+            performSegue(withIdentifier: "EditAccountTableViewController", sender: nil)
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EditRecordTableViewController" {
-            let indexPath = activityTableView.indexPathForSelectedRow!
+            let indexPath = recordTableView.indexPathForSelectedRow!
             let activity = accountManager.activityDictionary[activeAccount!]![indexPath.section]
             let record = accountManager.recordDictionary[activity]![indexPath.row]
             let atvc = segue.destination as! EditRecordTableViewController
             atvc.record = record
         }
+        
+        if segue.identifier == "EditAccountTableViewController" {
+            let ertvc = segue.destination as! EditAccountTableViewController
+            ertvc.reloadDelegate = self
+        }
     }
 }
 
+//MARK: TableView Methods
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return activeAccount?.activities?.count ?? 0
@@ -53,6 +61,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+//MARK: CollectionView Methods
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -71,5 +80,13 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         activeAccount = accountManager.accountArray[indexPath.item]
+    }
+}
+
+//MARK: Protocol Methods
+extension HomeViewController: ReloadDataProtocol {
+    func reloadAllData() {
+        accountCollectionView.reloadData()
+        recordTableView.reloadData()
     }
 }

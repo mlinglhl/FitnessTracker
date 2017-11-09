@@ -58,15 +58,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lv7-Z1-gPX">
-                                                    <rect key="frame" x="4" y="15" width="42" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lv7-Z1-gPX">
+                                                    <rect key="frame" x="14.5" y="38" width="21.5" height="10"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="8"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="Lv7-Z1-gPX" secondAttribute="bottom" constant="2" id="Bjb-pP-6gQ"/>
+                                            <constraint firstItem="Lv7-Z1-gPX" firstAttribute="centerX" secondItem="3ol-2r-Jfq" secondAttribute="centerX" id="TDj-dt-WPw"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="accountNameLabel" destination="Lv7-Z1-gPX" id="NTz-Iz-nQv"/>
                                         </connections>
@@ -90,50 +93,49 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="thv-eT-wZw"/>
+                    <navigationItem key="navigationItem" id="thv-eT-wZw">
+                        <barButtonItem key="leftBarButtonItem" title="New Account" id="PLS-On-DjB">
+                            <connections>
+                                <segue destination="MMe-Qg-mRy" kind="show" identifier="EditAccountTableViewController" id="nuM-Cm-vWx"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="New Record" id="W68-dD-fgQ"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="accountCollectionView" destination="HKB-8a-gKx" id="QBn-m0-spk"/>
-                        <outlet property="activityTableView" destination="FGM-jP-Syn" id="wtG-hF-HT6"/>
-                        <segue destination="MMe-Qg-mRy" kind="show" identifier="NewAccountTableViewController" id="zKE-kr-aJu"/>
+                        <outlet property="recordTableView" destination="FGM-jP-Syn" id="bX8-Dz-N1R"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="479.19999999999999" y="132.68365817091455"/>
         </scene>
-        <!--New Account Table View Controller-->
+        <!--Edit Account Table View Controller-->
         <scene sceneID="Bfg-MZ-QVv">
             <objects>
-                <tableViewController storyboardIdentifier="NewAccountTableViewController" id="MMe-Qg-mRy" customClass="NewAccountTableViewController" customModule="FitnessTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="NewAccountTableViewController" id="MMe-Qg-mRy" customClass="EditAccountTableViewController" customModule="FitnessTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="WHG-jU-lDW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
-                            <tableViewSection id="wQX-XX-oXE">
+                            <tableViewSection headerTitle="Name" id="wQX-XX-oXE">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="IWh-jU-l8V">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IWh-jU-l8V" id="k9i-Do-GU6">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="iE3-XX-abz">
-                                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iE3-XX-abz" id="Eue-Q5-bEi">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="gju-ed-6N4">
-                                        <rect key="frame" x="0.0" y="88" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gju-ed-6N4" id="q4L-Ob-7rJ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter account name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p2O-XG-QyZ">
+                                                    <rect key="frame" x="8" y="6" width="359" height="30"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <nil key="textColor"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -144,10 +146,20 @@
                             <outlet property="delegate" destination="MMe-Qg-mRy" id="ct5-LX-tR5"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="1rB-rR-6GL">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="K0a-3u-syu">
+                            <connections>
+                                <action selector="saveButtonPressed:" destination="MMe-Qg-mRy" id="9IM-E4-eds"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="accountNameTextField" destination="p2O-XG-QyZ" id="2Lt-if-0m8"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OIF-1T-Cx0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="453" y="844"/>
+            <point key="canvasLocation" x="452" y="843.32833583208401"/>
         </scene>
         <!--Edit Record Table View Controller-->
         <scene sceneID="r6E-gm-Gpr">

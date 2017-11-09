@@ -13,7 +13,6 @@ class AccountManager: NSObject {
     private override init() {}
     
     let dataManager = DataManager.sharedInstance
-    
     var accountArray = [AccountObject]()
     var activityDictionary = [AccountObject: [ActivityObject]]()
     var recordDictionary = [ActivityObject: [RecordObject]]()
@@ -39,5 +38,13 @@ class AccountManager: NSObject {
                 recordDictionary.updateValue(records, forKey: activity)
             }
         }
+    }
+    
+    func editAccount(_ account: AccountObject, new: Bool) {
+        if new {
+            accountArray.append(account)
+        }
+        accountArray.sort(by: {$0.name ?? "No name" > $1.name ?? "No name"})
+        dataManager.saveContext()
     }
 }
