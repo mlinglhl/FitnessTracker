@@ -10,6 +10,8 @@ import UIKit
 
 class RecordTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var weightLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

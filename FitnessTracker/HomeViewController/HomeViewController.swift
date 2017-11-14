@@ -9,7 +9,7 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-
+    
     //MARK: Properties
     let accountManager = AccountManager.sharedInstance
     @IBOutlet weak var recordTableView: UITableView!
@@ -27,11 +27,12 @@ class HomeViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EditRecordTableViewController" {
-            let indexPath = recordTableView.indexPathForSelectedRow!
-            let activity = accountManager.activityDictionary[activeAccount!]![indexPath.section]
-            let record = accountManager.recordDictionary[activity]![indexPath.row]
-            let atvc = segue.destination as! EditRecordTableViewController
-            atvc.record = record
+            if let indexPath = recordTableView.indexPathForSelectedRow {
+                let activity = accountManager.activityDictionary[activeAccount!]![indexPath.section]
+                let record = accountManager.recordDictionary[activity]![indexPath.row]
+                let atvc = segue.destination as! EditRecordTableViewController
+                atvc.record = record
+            }
         }
         
         if segue.identifier == "EditAccountTableViewController" {
@@ -47,12 +48,29 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         return activeAccount?.activities?.count ?? 0
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let activities = accountManager.activityDictionary[activeAccount!]!
+        return activities[section].name
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return activeAccount?.activities?.count ?? 0
+        guard let activities = accountManager.activityDictionary[activeAccount!] else {
+            return 0
+        }
+        
+        guard let records = accountManager.recordDictionary[activities[section]] else {
+            return 0
+        }
+        
+        return records.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecordTableViewCell", for: indexPath) as! RecordTableViewCell
+        let activity = accountManager.activityDictionary[activeAccount!]![indexPath.section]
+        let record = accountManager.recordDictionary[activity]![indexPath.row]
+        let weight = record.weight?.stringValue ?? "n/a"
+        cell.weightLabel.text = "Weight: \(weight)"
         return cell
     }
     
@@ -80,6 +98,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         activeAccount = accountManager.accountArray[indexPath.item]
+        recordTableView.reloadData()
     }
 }
 
