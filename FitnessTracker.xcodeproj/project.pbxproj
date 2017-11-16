@@ -20,6 +20,7 @@
 		894D3CF61FB4CF760027143F /* AccountCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894D3CF51FB4CF760027143F /* AccountCollectionViewCell.swift */; };
 		894D3CF81FB4E7750027143F /* EditAccountTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894D3CF71FB4E7750027143F /* EditAccountTableViewController.swift */; };
 		894D3CFB1FB509A30027143F /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894D3CFA1FB509A30027143F /* Protocols.swift */; };
+		89861B701FBB7C8200AB5F87 /* ActivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89861B6F1FBB7C8200AB5F87 /* ActivityCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		894D3CF51FB4CF760027143F /* AccountCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCollectionViewCell.swift; sourceTree = "<group>"; };
 		894D3CF71FB4E7750027143F /* EditAccountTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAccountTableViewController.swift; sourceTree = "<group>"; };
 		894D3CFA1FB509A30027143F /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		89861B6F1FBB7C8200AB5F87 /* ActivityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				893B8FB61F8FEAED00A358F3 /* EditRecordTableViewController.swift */,
+				89861B6F1FBB7C8200AB5F87 /* ActivityCollectionViewCell.swift */,
 			);
 			path = ActivityTableViewController;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				893B8FB31F8FE59600A358F3 /* AccountManager.swift in Sources */,
 				893B8FAF1F8FE0E300A358F3 /* DataManager.swift in Sources */,
 				893B8FB51F8FE70700A358F3 /* RecordTableViewCell.swift in Sources */,
+				89861B701FBB7C8200AB5F87 /* ActivityCollectionViewCell.swift in Sources */,
 				894D3CFB1FB509A30027143F /* Protocols.swift in Sources */,
 				893B8FA21F8F061F00A358F3 /* FitnessTracker.xcdatamodeld in Sources */,
 				893B8F9A1F8F061F00A358F3 /* AppDelegate.swift in Sources */,

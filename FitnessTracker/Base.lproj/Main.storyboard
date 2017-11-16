@@ -187,7 +187,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <sections>
-                            <tableViewSection headerTitle="User" id="GO8-IU-z4X">
+                            <tableViewSection headerTitle="Activity" id="GO8-IU-z4X">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="J9Z-YL-8jp">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -195,6 +195,58 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="J9Z-YL-8jp" id="xkE-He-F7n">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Lvf-3t-4gm">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jZC-RD-oi7">
+                                                        <size key="itemSize" width="40" height="40"/>
+                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    </collectionViewFlowLayout>
+                                                    <cells>
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ActivityCollectionViewCell" id="DWX-7k-7jx" customClass="ActivityCollectionViewCell" customModule="FitnessTracker" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8p-yo-lqH">
+                                                                        <rect key="frame" x="2" y="18" width="36" height="20"/>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="height" constant="20" id="eWW-j2-th4"/>
+                                                                        </constraints>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                                                                        <nil key="textColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </view>
+                                                            <constraints>
+                                                                <constraint firstItem="r8p-yo-lqH" firstAttribute="centerX" secondItem="DWX-7k-7jx" secondAttribute="centerX" id="3D7-z9-r8w"/>
+                                                                <constraint firstItem="r8p-yo-lqH" firstAttribute="leading" secondItem="DWX-7k-7jx" secondAttribute="leading" constant="2" id="4NW-wl-x3d"/>
+                                                                <constraint firstAttribute="trailing" secondItem="r8p-yo-lqH" secondAttribute="trailing" constant="2" id="HaD-UP-CF3"/>
+                                                                <constraint firstAttribute="bottom" secondItem="r8p-yo-lqH" secondAttribute="bottom" constant="2" id="m8t-7s-ze7"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <outlet property="nameLabel" destination="r8p-yo-lqH" id="c3z-4a-dt8"/>
+                                                            </connections>
+                                                        </collectionViewCell>
+                                                    </cells>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="nDc-qk-lVH" id="Ygf-hs-agl"/>
+                                                        <outlet property="delegate" destination="nDc-qk-lVH" id="Axd-3Y-Fq3"/>
+                                                    </connections>
+                                                </collectionView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Lvf-3t-4gm" secondAttribute="bottom" id="8zi-vW-HvC"/>
+                                                <constraint firstItem="Lvf-3t-4gm" firstAttribute="leading" secondItem="xkE-He-F7n" secondAttribute="leading" id="9tM-nV-XY7"/>
+                                                <constraint firstItem="Lvf-3t-4gm" firstAttribute="top" secondItem="xkE-He-F7n" secondAttribute="top" id="SDp-Z5-ivA"/>
+                                                <constraint firstAttribute="trailing" secondItem="Lvf-3t-4gm" secondAttribute="trailing" id="Ua8-7r-M9E"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -245,8 +297,11 @@
                                                 </segmentedControl>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="d3z-Lc-bZW">
                                                     <rect key="frame" x="6" y="6.5" width="228" height="31"/>
+                                                    <connections>
+                                                        <action selector="weightSliderChanged:" destination="nDc-qk-lVH" eventType="valueChanged" id="Cx5-YU-Q4g"/>
+                                                    </connections>
                                                 </slider>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hew-F3-nYi">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hew-F3-nYi">
                                                     <rect key="frame" x="240" y="11" width="60" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="XrR-9c-KVG"/>
@@ -278,10 +333,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="300" translatesAutoresizingMaskIntoConstraints="NO" id="0cv-jJ-MhV">
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="0cv-jJ-MhV">
                                                     <rect key="frame" x="6" y="6.5" width="228" height="31"/>
+                                                    <connections>
+                                                        <action selector="repSliderChanged:" destination="nDc-qk-lVH" eventType="valueChanged" id="hQj-Rv-xJI"/>
+                                                    </connections>
                                                 </slider>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cLc-G0-3Bx">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cLc-G0-3Bx">
                                                     <rect key="frame" x="240" y="11" width="60" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="rXP-Ip-rcW"/>
@@ -330,6 +388,8 @@
                     <connections>
                         <outlet property="nameTextField" destination="YVc-KT-FBu" id="vBC-Tt-SaK"/>
                         <outlet property="repSlider" destination="0cv-jJ-MhV" id="LMI-cY-8Ru"/>
+                        <outlet property="repsAmountLabel" destination="cLc-G0-3Bx" id="NqN-MC-62D"/>
+                        <outlet property="weightAmountLabel" destination="hew-F3-nYi" id="qSN-Ni-TXq"/>
                         <outlet property="weightSlider" destination="d3z-Lc-bZW" id="qbj-lo-k03"/>
                     </connections>
                 </tableViewController>

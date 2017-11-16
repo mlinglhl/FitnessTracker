@@ -22,15 +22,18 @@ class HomeViewController: UIViewController {
         accountManager.setUp()
         if accountManager.accountArray.count == 0 {
             performSegue(withIdentifier: "EditAccountTableViewController", sender: nil)
+            return
         }
+        activeAccount = accountManager.accountArray[0]
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EditRecordTableViewController" {
+            let atvc = segue.destination as! EditRecordTableViewController
+            atvc.account = activeAccount
             if let indexPath = recordTableView.indexPathForSelectedRow {
                 let activity = accountManager.activityDictionary[activeAccount!]![indexPath.section]
                 let record = accountManager.recordDictionary[activity]![indexPath.row]
-                let atvc = segue.destination as! EditRecordTableViewController
                 atvc.record = record
             }
         }
