@@ -52,6 +52,10 @@ extension EditRecordTableViewController: UICollectionViewDataSource, UICollectio
         return 1
     }
 
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 60
+//    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let activities = accountManager.activityDictionary[account] else {
             return 1
