@@ -9,14 +9,15 @@
 import UIKit
 
 class EditRecordTableViewController: UITableViewController {
-
+    
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var weightSlider: UISlider!
     @IBOutlet weak var repSlider: UISlider!
-
+    
     var record: RecordObject?
     var account: AccountObject!
     let accountManager = AccountManager.sharedInstance
+    var newAccount = false
     
     @IBOutlet weak var repsAmountLabel: UILabel!
     @IBOutlet weak var weightAmountLabel: UILabel!
@@ -36,7 +37,7 @@ class EditRecordTableViewController: UITableViewController {
     @IBAction func weightSliderChanged(_ sender: UISlider) {
         weightAmountLabel.text = "\(Int(sender.value))"
     }
-
+    
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
         let dataManager = DataManager.sharedInstance
         if record == nil {
@@ -47,14 +48,28 @@ class EditRecordTableViewController: UITableViewController {
     }
 }
 
+//MARK: TableView Methods
+extension EditRecordTableViewController {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 1 && newAccount == false {
+            return 0
+        }
+        return 60
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 1 && newAccount == false {
+            return 0
+        }
+        return 20
+    }
+}
+
+//MARK: Collection View Methods
 extension EditRecordTableViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 60
-//    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         guard let activities = accountManager.activityDictionary[account] else {
@@ -71,9 +86,21 @@ extension EditRecordTableViewController: UICollectionViewDataSource, UICollectio
             cell.nameLabel.text = "New Activity"
             return cell
         }
-
+        
         let activity = activityArray[indexPath.item]
         cell.nameLabel.text = activity.name
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let activityArray = accountManager.activityDictionary[account]!
+        tableView.beginUpdates()
+        if indexPath.item + 1 > activityArray.count {
+            newAccount = true
+        } else {
+            newAccount = false
+            nameTextField.text = ""
+        }        
+        tableView.endUpdates()
     }
 }

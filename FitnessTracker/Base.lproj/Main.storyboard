@@ -198,7 +198,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Lvf-3t-4gm">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
+                                                    <rect key="frame" x="8" y="0.0" width="359" height="59.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jZC-RD-oi7">
                                                         <size key="itemSize" width="55" height="55"/>
@@ -244,9 +244,9 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="Lvf-3t-4gm" secondAttribute="bottom" id="8zi-vW-HvC"/>
-                                                <constraint firstItem="Lvf-3t-4gm" firstAttribute="leading" secondItem="xkE-He-F7n" secondAttribute="leading" id="9tM-nV-XY7"/>
+                                                <constraint firstItem="Lvf-3t-4gm" firstAttribute="leading" secondItem="xkE-He-F7n" secondAttribute="leading" constant="8" id="9tM-nV-XY7"/>
                                                 <constraint firstItem="Lvf-3t-4gm" firstAttribute="top" secondItem="xkE-He-F7n" secondAttribute="top" id="SDp-Z5-ivA"/>
-                                                <constraint firstAttribute="trailing" secondItem="Lvf-3t-4gm" secondAttribute="trailing" id="Ua8-7r-M9E"/>
+                                                <constraint firstAttribute="trailing" secondItem="Lvf-3t-4gm" secondAttribute="trailing" constant="8" id="Ua8-7r-M9E"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -361,14 +361,35 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Time" id="wcA-ka-wVA">
+                            <tableViewSection headerTitle="Time" id="lpx-dH-Wor">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="JqD-eL-k4x">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="oq6-EU-nFf">
                                         <rect key="frame" x="0.0" y="380" width="375" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JqD-eL-k4x" id="EeY-ZW-mGY">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oq6-EU-nFf" id="kaJ-7F-QqH">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="jBk-G9-LR7">
+                                                    <rect key="frame" x="6" y="15" width="228" height="31"/>
+                                                </slider>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3mX-M6-CVA">
+                                                    <rect key="frame" x="240" y="19.5" width="60" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="HKc-Fz-xNa"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="jBk-G9-LR7" firstAttribute="centerY" secondItem="kaJ-7F-QqH" secondAttribute="centerY" id="6yy-BF-IlC"/>
+                                                <constraint firstItem="3mX-M6-CVA" firstAttribute="leading" secondItem="jBk-G9-LR7" secondAttribute="trailing" constant="8" id="J0R-WI-JAV"/>
+                                                <constraint firstItem="jBk-G9-LR7" firstAttribute="leading" secondItem="kaJ-7F-QqH" secondAttribute="leading" constant="8" id="Pa4-NF-2Rd"/>
+                                                <constraint firstItem="3mX-M6-CVA" firstAttribute="centerY" secondItem="kaJ-7F-QqH" secondAttribute="centerY" id="R2l-5h-rE6"/>
+                                                <constraint firstAttribute="trailing" secondItem="3mX-M6-CVA" secondAttribute="trailing" constant="75" id="s7e-KQ-9Wr"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
