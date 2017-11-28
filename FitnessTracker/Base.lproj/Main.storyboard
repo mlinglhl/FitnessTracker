@@ -214,7 +214,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8p-yo-lqH">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8p-yo-lqH">
                                                                         <rect key="frame" x="2" y="33" width="51" height="20"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="20" id="eWW-j2-th4"/>
@@ -226,7 +226,6 @@
                                                                 </subviews>
                                                             </view>
                                                             <constraints>
-                                                                <constraint firstItem="r8p-yo-lqH" firstAttribute="centerX" secondItem="DWX-7k-7jx" secondAttribute="centerX" id="3D7-z9-r8w"/>
                                                                 <constraint firstItem="r8p-yo-lqH" firstAttribute="leading" secondItem="DWX-7k-7jx" secondAttribute="leading" constant="2" id="4NW-wl-x3d"/>
                                                                 <constraint firstAttribute="trailing" secondItem="r8p-yo-lqH" secondAttribute="trailing" constant="2" id="HaD-UP-CF3"/>
                                                                 <constraint firstAttribute="bottom" secondItem="r8p-yo-lqH" secondAttribute="bottom" constant="2" id="m8t-7s-ze7"/>
@@ -408,6 +407,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityCollectionView" destination="Lvf-3t-4gm" id="aIh-aK-PHE"/>
                         <outlet property="nameTextField" destination="YVc-KT-FBu" id="vBC-Tt-SaK"/>
                         <outlet property="repSlider" destination="0cv-jJ-MhV" id="LMI-cY-8Ru"/>
                         <outlet property="repsAmountLabel" destination="cLc-G0-3Bx" id="NqN-MC-62D"/>

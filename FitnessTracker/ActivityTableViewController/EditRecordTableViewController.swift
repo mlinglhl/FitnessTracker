@@ -10,6 +10,7 @@ import UIKit
 
 class EditRecordTableViewController: UITableViewController {
     
+    @IBOutlet weak var activityCollectionView: UICollectionView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var weightSlider: UISlider!
     @IBOutlet weak var repSlider: UISlider!
@@ -18,6 +19,7 @@ class EditRecordTableViewController: UITableViewController {
     var account: AccountObject!
     let accountManager = AccountManager.sharedInstance
     var newAccount = false
+    var activityIndex: Int?
     
     @IBOutlet weak var repsAmountLabel: UILabel!
     @IBOutlet weak var weightAmountLabel: UILabel!
@@ -39,10 +41,29 @@ class EditRecordTableViewController: UITableViewController {
     }
     
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
+        guard let unwrappedActivityIndex = activityIndex else {
+            let alertController = UIAlertController(title: "No Activity", message: "Please select an activity.", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+            return
+        }
+        
+        let activityArray = accountManager.activityDictionary[account]!
+        if unwrappedActivityIndex == activityArray.count {
+            guard nameTextField.text != "" else {
+                let alertController = UIAlertController(title: "No Activity Name", message: "Please name your activity.", preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+                return
+            }
+        }
+        
+        
         let dataManager = DataManager.sharedInstance
         if record == nil {
             record = dataManager.generateRecord()
         }
+        
         record!.weight = NSDecimalNumber(value: weightSlider.value)
         record!.repetitions = Int16(repSlider.value)
     }
@@ -93,6 +114,7 @@ extension EditRecordTableViewController: UICollectionViewDataSource, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        activityIndex = indexPath.item
         let activityArray = accountManager.activityDictionary[account]!
         tableView.beginUpdates()
         if indexPath.item + 1 > activityArray.count {
@@ -100,7 +122,7 @@ extension EditRecordTableViewController: UICollectionViewDataSource, UICollectio
         } else {
             newAccount = false
             nameTextField.text = ""
-        }        
+        }
         tableView.endUpdates()
     }
 }
