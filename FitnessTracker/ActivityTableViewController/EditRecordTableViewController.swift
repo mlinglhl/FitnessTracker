@@ -18,7 +18,7 @@ class EditRecordTableViewController: UITableViewController {
     var record: RecordObject?
     var account: AccountObject!
     let accountManager = AccountManager.sharedInstance
-    var newAccount = false
+    var newActivity = false
     var activityIndex: Int?
     
     @IBOutlet weak var repsAmountLabel: UILabel!
@@ -49,37 +49,47 @@ class EditRecordTableViewController: UITableViewController {
         }
         
         let activityArray = accountManager.activityDictionary[account]!
-        if unwrappedActivityIndex == activityArray.count {
-            guard nameTextField.text != "" else {
-                let alertController = UIAlertController(title: "No Activity Name", message: "Please name your activity.", preferredStyle: UIAlertControllerStyle.alert)
-                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-                self.present(alertController, animated: true, completion: nil)
-                return
-            }
+        
+        guard nameTextField.text != "" && unwrappedActivityIndex == activityArray.count else {
+            let alertController = UIAlertController(title: "No Activity Name", message: "Please name your activity.", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alertController, animated: true, completion: nil)
+            return
         }
         
-        
         let dataManager = DataManager.sharedInstance
+
         if record == nil {
             record = dataManager.generateRecord()
         }
         
+        if unwrappedActivityIndex == activityArray.count {
+            let activity = dataManager.generateActivity()
+            account.addToActivities(activity)
+            activity.name = nameTextField.text
+            record!.activity = activity
+        } else {
+            record!.activity = activityArray[unwrappedActivityIndex]
+        }
+        
         record!.weight = NSDecimalNumber(value: weightSlider.value)
         record!.repetitions = Int16(repSlider.value)
+        
+        dataManager.saveContext()
     }
 }
 
 //MARK: TableView Methods
 extension EditRecordTableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 1 && newAccount == false {
+        if indexPath.section == 1 && newActivity == false {
             return 0
         }
         return 60
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 1 && newAccount == false {
+        if section == 1 && newActivity == false {
             return 0
         }
         return 20
@@ -118,9 +128,9 @@ extension EditRecordTableViewController: UICollectionViewDataSource, UICollectio
         let activityArray = accountManager.activityDictionary[account]!
         tableView.beginUpdates()
         if indexPath.item + 1 > activityArray.count {
-            newAccount = true
+            newActivity = true
         } else {
-            newAccount = false
+            newActivity = false
             nameTextField.text = ""
         }
         tableView.endUpdates()
