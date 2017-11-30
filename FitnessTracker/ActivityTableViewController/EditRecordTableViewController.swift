@@ -15,7 +15,7 @@ class EditRecordTableViewController: UITableViewController {
     @IBOutlet weak var weightSlider: UISlider!
     @IBOutlet weak var repSlider: UISlider!
     
-    var record: RecordObject?
+    var record: RecordObject!
     var account: AccountObject!
     let accountManager = AccountManager.sharedInstance
     var newActivity = false
@@ -26,6 +26,10 @@ class EditRecordTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+        
+        if record == nil {
+            record = DataManager.sharedInstance.generateRecord()
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -59,23 +63,26 @@ class EditRecordTableViewController: UITableViewController {
         
         let dataManager = DataManager.sharedInstance
 
-        if record == nil {
-            record = dataManager.generateRecord()
-        }
-        
         if unwrappedActivityIndex == activityArray.count {
             let activity = dataManager.generateActivity()
             account.addToActivities(activity)
             activity.name = nameTextField.text
-            record!.activity = activity
+            record.activity = activity
         } else {
-            record!.activity = activityArray[unwrappedActivityIndex]
+            record.activity = activityArray[unwrappedActivityIndex]
         }
         
-        record!.weight = NSDecimalNumber(value: weightSlider.value)
-        record!.repetitions = Int16(repSlider.value)
+        record.weight = NSDecimalNumber(value: weightSlider.value)
+        record.repetitions = Int16(repSlider.value)
         
         dataManager.saveContext()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if record.activity == nil {
+            DataManager.sharedInstance.deleteObject(record)
+        }
+        super.viewWillDisappear(animated)
     }
 }
 
