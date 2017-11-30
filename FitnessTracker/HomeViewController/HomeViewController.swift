@@ -30,6 +30,7 @@ class HomeViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EditRecordTableViewController" {
             let atvc = segue.destination as! EditRecordTableViewController
+            atvc.reloadDataDelegate = self
             atvc.account = activeAccount
             if let indexPath = recordTableView.indexPathForSelectedRow {
                 let activity = accountManager.activityDictionary[activeAccount!]![indexPath.section]

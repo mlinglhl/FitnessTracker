@@ -20,6 +20,7 @@ class EditRecordTableViewController: UITableViewController {
     let accountManager = AccountManager.sharedInstance
     var newActivity = false
     var activityIndex: Int?
+    var reloadDataDelegate: ReloadDataProtocol!
     
     @IBOutlet weak var repsAmountLabel: UILabel!
     @IBOutlet weak var weightAmountLabel: UILabel!
@@ -45,6 +46,8 @@ class EditRecordTableViewController: UITableViewController {
     }
     
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
+        
+        //ensure an activity is selected
         guard let unwrappedActivityIndex = activityIndex else {
             let alertController = UIAlertController(title: "No Activity", message: "Please select an activity.", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
@@ -54,7 +57,8 @@ class EditRecordTableViewController: UITableViewController {
         
         let activityArray = accountManager.activityDictionary[account]!
         
-        guard nameTextField.text != "" && unwrappedActivityIndex == activityArray.count else {
+        //ensure if New Activity is selected, a name is entered
+        guard nameTextField.text != "" || unwrappedActivityIndex != activityArray.count else {
             let alertController = UIAlertController(title: "No Activity Name", message: "Please name your activity.", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             self.present(alertController, animated: true, completion: nil)
@@ -76,6 +80,8 @@ class EditRecordTableViewController: UITableViewController {
         record.repetitions = Int16(repSlider.value)
         
         dataManager.saveContext()
+        
+        navigationController?.popViewController(animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
