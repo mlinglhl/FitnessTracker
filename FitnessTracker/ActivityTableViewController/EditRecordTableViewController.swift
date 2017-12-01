@@ -67,20 +67,23 @@ class EditRecordTableViewController: UITableViewController {
         
         let dataManager = DataManager.sharedInstance
 
+        var activity: ActivityObject!
+
         if unwrappedActivityIndex == activityArray.count {
-            let activity = dataManager.generateActivity()
-            account.addToActivities(activity)
+            activity = dataManager.generateActivity()
             activity.name = nameTextField.text
-            record.activity = activity
+            accountManager.addActivity(activity, account: account)
         } else {
-            record.activity = activityArray[unwrappedActivityIndex]
+            activity = activityArray[unwrappedActivityIndex]
         }
         
         record.weight = NSDecimalNumber(value: weightSlider.value)
         record.repetitions = Int16(repSlider.value)
         
+        accountManager.addRecord(record, activity: activity)
+
         dataManager.saveContext()
-        
+        reloadDataDelegate.reloadAllData()
         navigationController?.popViewController(animated: true)
     }
     

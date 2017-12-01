@@ -47,4 +47,31 @@ class AccountManager: NSObject {
         accountArray.sort(by: {$0.name ?? "No name" > $1.name ?? "No name"})
         dataManager.saveContext()
     }
+    
+    func addActivity(_ activity: ActivityObject, account: AccountObject) {
+        account.addToActivities(activity)
+        var activityArray = activityDictionary[account]
+        
+        if activityArray == nil {
+            activityArray = [ActivityObject]()
+        }
+        
+        activityArray!.append(activity)
+        activityArray!.sort(by: { $0.name ?? "No name" > $1.name ?? "No name"})
+        activityDictionary.updateValue(activityArray!, forKey: account)
+    }
+    
+    func addRecord(_ record: RecordObject, activity: ActivityObject) {
+        activity.addToRecords(record)
+        
+        var recordArray = recordDictionary[activity]
+        
+        if recordArray == nil {
+            recordArray = [RecordObject]()
+        }
+        
+        recordArray!.append(record)
+        recordArray!.sort(by: {$0.weight?.intValue ?? 0 > $1.weight?.intValue ?? 0})
+        recordDictionary.updateValue(recordArray!, forKey: activity)
+    }
 }
