@@ -32,9 +32,11 @@ class EditRecordTableViewController: UITableViewController {
             record = DataManager.sharedInstance.generateRecord()
             return
         }
-        
+        activityIndex = 0
         repsAmountLabel.text = "\(record.repetitions)"
+        repSlider.value = Float(record.repetitions)
         weightAmountLabel.text = "\(record.weight ?? 0)"
+        weightSlider.value = record.weight?.floatValue ?? 0
     }
     
     //disables slide to go back to improve usability
@@ -85,8 +87,10 @@ class EditRecordTableViewController: UITableViewController {
             activity = activityArray[unwrappedActivityIndex]
         }
         
-        record.weight = NSDecimalNumber(value: weightSlider.value)
-        record.repetitions = Int16(repSlider.value)
+        //update weight and repetition values based on sliders
+        record.weight = NSDecimalNumber(value: Int(weightSlider.value))
+        record.repetitions = Int16(Int(repSlider.value))
+        
         accountManager.addRecord(record, activity: activity)
 
         dataManager.saveContext()

@@ -70,7 +70,10 @@ class AccountManager: NSObject {
             recordArray = [RecordObject]()
         }
         
-        recordArray!.append(record)
+        if !recordArray!.contains(record) {
+            recordArray!.append(record)
+        }
+        
         recordArray!.sort(by: {$0.weight?.intValue ?? 0 > $1.weight?.intValue ?? 0})
         recordDictionary.updateValue(recordArray!, forKey: activity)
     }
