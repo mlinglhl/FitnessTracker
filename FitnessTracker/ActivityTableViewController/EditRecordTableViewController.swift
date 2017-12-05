@@ -26,22 +26,37 @@ class EditRecordTableViewController: UITableViewController {
     @IBOutlet weak var weightAmountLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        //disables slide to go back to improve usability
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
         if record == nil {
             record = DataManager.sharedInstance.generateRecord()
             return
         }
-        activityIndex = 0
+        
+        setExistingRecordValues()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if record.activity == nil {
+            DataManager.sharedInstance.deleteObject(record)
+        }
+        super.viewWillDisappear(animated)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+    }
+    
+    //if editing an existing record, will set the sliders and labels to the record's values
+    func setExistingRecordValues() {
+        let activityArray = accountManager.activityDictionary[account]!
+        
+        activityIndex = activityArray.index(of: record.activity!) ?? 0
         repsAmountLabel.text = "\(record.repetitions)"
         repSlider.value = Float(record.repetitions)
         weightAmountLabel.text = "\(record.weight ?? 0)"
         weightSlider.value = record.weight?.floatValue ?? 0
-    }
-    
-    //disables slide to go back to improve usability
-    override func viewDidDisappear(_ animated: Bool) {
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     
     //MARK: Methods to update labels associated with sliders
@@ -58,9 +73,7 @@ class EditRecordTableViewController: UITableViewController {
         
         //ensure an activity is selected
         guard let unwrappedActivityIndex = activityIndex else {
-            let alertController = UIAlertController(title: "No Activity", message: "Please select an activity.", preferredStyle: UIAlertControllerStyle.alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alertController, animated: true, completion: nil)
+            createAlertWithTitle("No Activity", message: "Please select an activity")
             return
         }
         
@@ -68,14 +81,11 @@ class EditRecordTableViewController: UITableViewController {
         
         //ensure if New Activity is selected, a name is entered
         guard nameTextField.text != "" || unwrappedActivityIndex != activityArray.count else {
-            let alertController = UIAlertController(title: "No Activity Name", message: "Please name your activity.", preferredStyle: UIAlertControllerStyle.alert)
-            alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alertController, animated: true, completion: nil)
+            createAlertWithTitle("No Activity Name", message: "Please name your activity.")
             return
         }
         
         let dataManager = DataManager.sharedInstance
-
         var activity: ActivityObject!
 
         //creates new activity is new activity is selected
@@ -98,12 +108,13 @@ class EditRecordTableViewController: UITableViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        if record.activity == nil {
-            DataManager.sharedInstance.deleteObject(record)
-        }
-        super.viewWillDisappear(animated)
+    func createAlertWithTitle(_ title: String, message: String) {
+        let alertController = UIAlertController(title: "No Activity", message: "Please select an activity.", preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
+
     }
+    
 }
 
 //MARK: TableView Methods
