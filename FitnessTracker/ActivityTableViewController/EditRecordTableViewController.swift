@@ -30,13 +30,19 @@ class EditRecordTableViewController: UITableViewController {
         
         if record == nil {
             record = DataManager.sharedInstance.generateRecord()
+            return
         }
+        
+        repsAmountLabel.text = "\(record.repetitions)"
+        weightAmountLabel.text = "\(record.weight ?? 0)"
     }
     
+    //disables slide to go back to improve usability
     override func viewDidDisappear(_ animated: Bool) {
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
     
+    //MARK: Methods to update labels associated with sliders
     @IBAction func repSliderChanged(_ sender: UISlider) {
         repsAmountLabel.text = "\(Int(sender.value))"
     }
@@ -45,6 +51,7 @@ class EditRecordTableViewController: UITableViewController {
         weightAmountLabel.text = "\(Int(sender.value))"
     }
     
+    //MARK: Save function
     @IBAction func saveButtonPressed(_ sender: UIBarButtonItem) {
         
         //ensure an activity is selected
@@ -69,6 +76,7 @@ class EditRecordTableViewController: UITableViewController {
 
         var activity: ActivityObject!
 
+        //creates new activity is new activity is selected
         if unwrappedActivityIndex == activityArray.count {
             activity = dataManager.generateActivity()
             activity.name = nameTextField.text
@@ -79,7 +87,6 @@ class EditRecordTableViewController: UITableViewController {
         
         record.weight = NSDecimalNumber(value: weightSlider.value)
         record.repetitions = Int16(repSlider.value)
-        
         accountManager.addRecord(record, activity: activity)
 
         dataManager.saveContext()
