@@ -63,12 +63,15 @@ class AccountManager: NSObject {
     
     func addRecord(_ record: RecordObject, activity: ActivityObject) {
         
-        if let activity = record.activity {
-            var records = recordDictionary[activity]!
-            let recordIndex = records.index(of: record)
-            if let recordIndex = recordIndex {
-                records.remove(at: recordIndex)
-                recordDictionary.updateValue(records, forKey: activity)
+        //checks if activity has changed
+        if let recordActivity = record.activity {
+            if recordActivity != activity {
+                var records = recordDictionary[recordActivity]!
+                let recordIndex = records.index(of: record)
+                if let recordIndex = recordIndex {
+                    records.remove(at: recordIndex)
+                    recordDictionary.updateValue(records, forKey: recordActivity)
+                }
             }
         }
         

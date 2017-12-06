@@ -412,6 +412,7 @@
                         <outlet property="repSlider" destination="0cv-jJ-MhV" id="LMI-cY-8Ru"/>
                         <outlet property="repsAmountLabel" destination="cLc-G0-3Bx" id="NqN-MC-62D"/>
                         <outlet property="weightAmountLabel" destination="hew-F3-nYi" id="qSN-Ni-TXq"/>
+                        <outlet property="weightInLbsSegmentedControl" destination="J1y-op-WIN" id="2qT-Bc-0G4"/>
                         <outlet property="weightSlider" destination="d3z-Lc-bZW" id="qbj-lo-k03"/>
                     </connections>
                 </tableViewController>

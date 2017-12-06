@@ -10,6 +10,7 @@ import UIKit
 
 class EditRecordTableViewController: UITableViewController {
     
+    @IBOutlet weak var weightInLbsSegmentedControl: UISegmentedControl!
     @IBOutlet weak var activityCollectionView: UICollectionView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var weightSlider: UISlider!
@@ -100,6 +101,18 @@ class EditRecordTableViewController: UITableViewController {
         //update weight and repetition values based on sliders
         record.weight = NSDecimalNumber(value: Int(weightSlider.value))
         record.repetitions = Int16(Int(repSlider.value))
+        
+        switch weightInLbsSegmentedControl.selectedSegmentIndex {
+        case 0:
+            record.weightInPounds = true
+            break
+        case 1:
+            record.weightInPounds = false
+            break
+        default:
+            record.weightInPounds = true
+            break
+        }
         
         accountManager.addRecord(record, activity: activity)
 
