@@ -16,7 +16,8 @@ class AccountManager: NSObject {
     var accountArray = [AccountObject]()
     var activityDictionary = [AccountObject: [ActivityObject]]()
     var recordDictionary = [ActivityObject: [RecordObject]]()
-    
+    var activeAccount: AccountObject?
+
     func setUp() {
         accountArray = dataManager.fetchAccounts()
         accountArray.sort(by: {$0.name ?? "No name" > $1.name ?? "No name"})
@@ -38,12 +39,17 @@ class AccountManager: NSObject {
                 recordDictionary.updateValue(records, forKey: activity)
             }
         }
+        
+        if accountArray.count > 0 {
+            activeAccount = accountArray[0]
+        }
     }
     
     func editAccount(_ account: AccountObject, new: Bool) {
         if new {
             accountArray.append(account)
         }
+        activeAccount = account
         accountArray.sort(by: {$0.name ?? "No name" > $1.name ?? "No name"})
         dataManager.saveContext()
     }
@@ -89,5 +95,12 @@ class AccountManager: NSObject {
         
         recordArray!.sort(by: {$0.weight?.intValue ?? 0 > $1.weight?.intValue ?? 0})
         recordDictionary.updateValue(recordArray!, forKey: activity)
+    }
+    
+    func getActivityArrayForAccount(_ account: AccountObject) -> [ActivityObject] {
+        if activityDictionary[account] == nil {
+            activityDictionary.updateValue([ActivityObject](), forKey: account)
+        }
+        return activityDictionary[account]!
     }
 }

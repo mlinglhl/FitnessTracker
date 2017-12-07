@@ -102,6 +102,7 @@ class EditRecordTableViewController: UITableViewController {
         record.weight = NSDecimalNumber(value: Int(weightSlider.value))
         record.repetitions = Int16(Int(repSlider.value))
         
+        //update whether or not the weight is in lbs
         switch weightInLbsSegmentedControl.selectedSegmentIndex {
         case 0:
             record.weightInPounds = true
@@ -162,7 +163,7 @@ extension EditRecordTableViewController: UICollectionViewDataSource, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActivityCollectionViewCell", for: indexPath) as! ActivityCollectionViewCell
-        let activityArray = accountManager.activityDictionary[account]!
+        let activityArray = accountManager.getActivityArrayForAccount(account)
         
         if indexPath.item + 1 > activityArray.count {
             cell.nameLabel.text = "New Activity"
@@ -175,6 +176,11 @@ extension EditRecordTableViewController: UICollectionViewDataSource, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let cell = collectionView.cellForItem(at: indexPath)
+        cell?.layer.borderWidth = 2.0
+        cell?.layer.borderColor = UIColor.gray.cgColor
+        
         activityIndex = indexPath.item
         let activityArray = accountManager.activityDictionary[account]!
         tableView.beginUpdates()

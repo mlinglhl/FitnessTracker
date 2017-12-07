@@ -14,26 +14,24 @@ class HomeViewController: UIViewController {
     let accountManager = AccountManager.sharedInstance
     @IBOutlet weak var recordTableView: UITableView!
     @IBOutlet weak var accountCollectionView: UICollectionView!
-    var activeAccount: AccountObject?
     
     //MARK: Life Cycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         accountManager.setUp()
-        if accountManager.accountArray.count == 0 {
+        if accountManager.activeAccount == nil {
             performSegue(withIdentifier: "EditAccountTableViewController", sender: nil)
             return
         }
-        activeAccount = accountManager.accountArray[0]
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "EditRecordTableViewController" {
             let atvc = segue.destination as! EditRecordTableViewController
             atvc.reloadDataDelegate = self
-            atvc.account = activeAccount
+            atvc.account = accountManager.activeAccount!
             if let indexPath = recordTableView.indexPathForSelectedRow {
-                let activity = accountManager.activityDictionary[activeAccount!]![indexPath.section]
+                let activity = accountManager.activityDictionary[accountManager.activeAccount!]![indexPath.section]
                 let record = accountManager.recordDictionary[activity]![indexPath.row]
                 atvc.record = record
             }
@@ -49,16 +47,16 @@ class HomeViewController: UIViewController {
 //MARK: TableView Methods
 extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return activeAccount?.activities?.count ?? 0
+        return accountManager.activeAccount?.activities?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let activities = accountManager.activityDictionary[activeAccount!]!
+        let activities = accountManager.activityDictionary[accountManager.activeAccount!]!
         return activities[section].name
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let activities = accountManager.activityDictionary[activeAccount!] else {
+        guard let activities = accountManager.activityDictionary[accountManager.activeAccount!] else {
             return 0
         }
         
@@ -71,7 +69,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecordTableViewCell", for: indexPath) as! RecordTableViewCell
-        let activity = accountManager.activityDictionary[activeAccount!]![indexPath.section]
+        let activity = accountManager.activityDictionary[accountManager.activeAccount!]![indexPath.section]
         let record = accountManager.recordDictionary[activity]![indexPath.row]
         let weight = record.weight?.stringValue ?? "n/a"
         cell.weightLabel.text = "Weight: \(weight)"
@@ -101,7 +99,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        activeAccount = accountManager.accountArray[indexPath.item]
+        accountManager.activeAccount = accountManager.accountArray[indexPath.item]
         recordTableView.reloadData()
     }
 }
