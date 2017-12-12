@@ -22,6 +22,7 @@ class EditRecordTableViewController: UITableViewController {
     var newActivity = false
     var activityIndex: Int?
     var reloadDataDelegate: ReloadDataProtocol!
+    var previousCell: UICollectionViewCell?
     
     @IBOutlet weak var repsAmountLabel: UILabel!
     @IBOutlet weak var weightAmountLabel: UILabel!
@@ -176,10 +177,13 @@ extension EditRecordTableViewController: UICollectionViewDataSource, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        previousCell?.layer.borderWidth = 0
+        previousCell?.layer.borderColor = nil
+
         let cell = collectionView.cellForItem(at: indexPath)
         cell?.layer.borderWidth = 2.0
         cell?.layer.borderColor = UIColor.gray.cgColor
+        previousCell = cell
         
         activityIndex = indexPath.item
         let activityArray = accountManager.activityDictionary[account]!
