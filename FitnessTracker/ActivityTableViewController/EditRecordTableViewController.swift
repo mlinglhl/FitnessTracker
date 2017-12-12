@@ -173,18 +173,17 @@ extension EditRecordTableViewController: UICollectionViewDataSource, UICollectio
         
         let activity = activityArray[indexPath.item]
         cell.nameLabel.text = activity.name
+        
+        if indexPath.item == activityIndex {
+            highlightCell(cell)
+        }
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        previousCell?.layer.borderWidth = 0
-        previousCell?.layer.borderColor = nil
-
         let cell = collectionView.cellForItem(at: indexPath)
-        cell?.layer.borderWidth = 2.0
-        cell?.layer.borderColor = UIColor.gray.cgColor
-        previousCell = cell
-        
+        highlightCell(cell)
         activityIndex = indexPath.item
         let activityArray = accountManager.activityDictionary[account]!
         tableView.beginUpdates()
@@ -195,5 +194,17 @@ extension EditRecordTableViewController: UICollectionViewDataSource, UICollectio
             nameTextField.text = ""
         }
         tableView.endUpdates()
+    }
+}
+
+//MARK: Helper Methods
+extension EditRecordTableViewController {
+    func highlightCell(_ cell: UICollectionViewCell?) {
+        previousCell?.layer.borderWidth = 0
+        previousCell?.layer.borderColor = nil
+        
+        cell?.layer.borderWidth = 2.0
+        cell?.layer.borderColor = UIColor.gray.cgColor
+        previousCell = cell
     }
 }

@@ -12,6 +12,8 @@ class HomeViewController: UIViewController {
     
     //MARK: Properties
     let accountManager = AccountManager.sharedInstance
+    var previousCell: UICollectionViewCell?
+    var accountIndex = 0
     @IBOutlet weak var recordTableView: UITableView!
     @IBOutlet weak var accountCollectionView: UICollectionView!
     
@@ -94,12 +96,21 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AccountCollectionViewCell", for: indexPath) as! AccountCollectionViewCell
         let account = accountManager.accountArray[indexPath.item]
+       
+        if account == accountManager.activeAccount {
+            highlightCell(cell)
+        }
+       
         cell.accountNameLabel.text = account.name ?? "No name"
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        accountManager.activeAccount = accountManager.accountArray[indexPath.item]
+        let cell = collectionView.cellForItem(at: indexPath)
+        highlightCell(cell)
+        previousCell = cell
+        
+        accountManager.setActiveAccountAtIndex(indexPath.item)
         recordTableView.reloadData()
     }
 }
@@ -109,5 +120,17 @@ extension HomeViewController: ReloadDataProtocol {
     func reloadAllData() {
         accountCollectionView.reloadData()
         recordTableView.reloadData()
+    }
+}
+
+//MARK: Helper Methods
+extension HomeViewController {
+    func highlightCell(_ cell: UICollectionViewCell?) {
+        previousCell?.layer.borderWidth = 0
+        previousCell?.layer.borderColor = nil
+        
+        cell?.layer.borderWidth = 2.0
+        cell?.layer.borderColor = UIColor.gray.cgColor
+        previousCell = cell
     }
 }

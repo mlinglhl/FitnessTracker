@@ -103,4 +103,9 @@ class AccountManager: NSObject {
         }
         return activityDictionary[account]!
     }
+    
+    func setActiveAccountAtIndex(_ index: Int) {        
+        activeAccount = accountArray[index]
+    }
+
 }
