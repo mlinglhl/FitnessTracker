@@ -23,6 +23,7 @@ class EditRecordTableViewController: UITableViewController {
     var activityIndex: Int?
     var reloadDataDelegate: ReloadDataProtocol!
     var previousCell: UICollectionViewCell?
+    var activityNameSet = Set<String>()
     
     @IBOutlet weak var repsAmountLabel: UILabel!
     @IBOutlet weak var weightAmountLabel: UILabel!
@@ -87,6 +88,14 @@ class EditRecordTableViewController: UITableViewController {
             return
         }
         
+        //ensure activity name is unique
+        if nameTextField.text != "" {
+            guard !activityNameSet.contains(nameTextField.text!) else {
+                createAlertWithTitle("Activity Already Exists", message: "There is already an activity with that name. Activity names must be unique.")
+                return
+            }
+        }
+        
         let dataManager = DataManager.sharedInstance
         var activity: ActivityObject!
 
@@ -124,7 +133,7 @@ class EditRecordTableViewController: UITableViewController {
     }
     
     func createAlertWithTitle(_ title: String, message: String) {
-        let alertController = UIAlertController(title: "No Activity", message: "Please select an activity.", preferredStyle: UIAlertControllerStyle.alert)
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
         self.present(alertController, animated: true, completion: nil)
 
@@ -173,6 +182,7 @@ extension EditRecordTableViewController: UICollectionViewDataSource, UICollectio
         
         let activity = activityArray[indexPath.item]
         cell.nameLabel.text = activity.name
+        activityNameSet.insert(activity.name ?? "No name")
         
         if indexPath.item == activityIndex {
             highlightCell(cell)
