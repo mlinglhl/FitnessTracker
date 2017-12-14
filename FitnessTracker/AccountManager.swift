@@ -20,14 +20,14 @@ class AccountManager: NSObject {
 
     func setUp() {
         accountArray = dataManager.fetchAccounts()
-        accountArray.sort(by: {$0.name ?? "No name" > $1.name ?? "No name"})
+        accountArray.sort(by: {$0.name ?? "No name" < $1.name ?? "No name"})
         
         for account in accountArray {
             var activities = [ActivityObject]()
             if account.activities != nil {
                 activities = Array(account.activities!) as! [ActivityObject]
             }
-            activities.sort(by: { $0.name ?? "No name" > $1.name ?? "No name"})
+            activities.sort(by: { $0.name ?? "No name" < $1.name ?? "No name"})
             activityDictionary.updateValue(activities, forKey: account)
             
             for activity in activities {
@@ -50,7 +50,7 @@ class AccountManager: NSObject {
             accountArray.append(account)
         }
         activeAccount = account
-        accountArray.sort(by: {$0.name ?? "No name" > $1.name ?? "No name"})
+        accountArray.sort(by: {$0.name ?? "No name" < $1.name ?? "No name"})
         dataManager.saveContext()
     }
     
@@ -63,7 +63,7 @@ class AccountManager: NSObject {
         }
         
         activityArray!.append(activity)
-        activityArray!.sort(by: { $0.name ?? "No name" > $1.name ?? "No name"})
+        activityArray!.sort(by: { $0.name ?? "No name" < $1.name ?? "No name"})
         activityDictionary.updateValue(activityArray!, forKey: account)
     }
     

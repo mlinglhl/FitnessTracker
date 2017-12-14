@@ -46,7 +46,7 @@ class EditRecordTableViewController: UITableViewController {
         }
         super.viewWillDisappear(animated)
     }
-
+    
     override func viewDidDisappear(_ animated: Bool) {
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
@@ -83,9 +83,11 @@ class EditRecordTableViewController: UITableViewController {
         let activityArray = accountManager.activityDictionary[account]!
         
         //ensure if New Activity is selected, a name is entered
-        guard nameTextField.text != "" || unwrappedActivityIndex != activityArray.count else {
-            createAlertWithTitle("No Activity Name", message: "Please name your activity.")
-            return
+        if unwrappedActivityIndex == activityArray.count {
+            guard nameTextField.text != "" else {
+                createAlertWithTitle("No Activity Name", message: "Please name your activity.")
+                return
+            }
         }
         
         //ensure activity name is unique
@@ -98,7 +100,7 @@ class EditRecordTableViewController: UITableViewController {
         
         let dataManager = DataManager.sharedInstance
         var activity: ActivityObject!
-
+        
         //creates new activity is new activity is selected
         if unwrappedActivityIndex == activityArray.count {
             activity = dataManager.generateActivity()
@@ -126,7 +128,7 @@ class EditRecordTableViewController: UITableViewController {
         }
         
         accountManager.addRecord(record, activity: activity)
-
+        
         dataManager.saveContext()
         reloadDataDelegate.reloadAllData()
         navigationController?.popViewController(animated: true)
@@ -136,7 +138,7 @@ class EditRecordTableViewController: UITableViewController {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
         self.present(alertController, animated: true, completion: nil)
-
+        
     }
     
 }
